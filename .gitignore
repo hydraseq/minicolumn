@@ -1,0 +1,11 @@
+.vscode
+build/
+**/*__pycache__/
+**/*.pyc
+.DS_Store
+.cache/
+env/
+**/*.ipynb_checkpoints/
+**/*.pytest_cache/
+Untitled.ipynb
+hydraseq.egg-INFO/
