@@ -11,6 +11,7 @@ setuptools.setup(
     description="Simple data structure for sequence memory",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    install_requires=['hydraseq'],
     url="https://github.com/hydraseq/minicolumn",
     packages=setuptools.find_packages(),
     classifiers=(

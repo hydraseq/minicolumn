@@ -1,2 +1,2 @@
-hydraseq==0.0.27
+hydraseq
 pytest
