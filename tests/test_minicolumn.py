@@ -161,3 +161,15 @@ def test_output_to_tree_nodes():
             {'words': [['spring']], 'convo': ['0_ADJ', '0_NOU', '0_VER'], 'start': 2, 'end': 3}
         ]
     ]
+
+def test_evaluate():
+
+    sentence = "good morning"
+    source_files = ["chat.0.txt", "chat.1.txt", "chat.2.txt"]
+    mcol = MiniColumn(source_files, "tests/data")
+
+    predicts = mcol.evaluate(sentence)
+    
+    assert len(predicts) == 2
+
+

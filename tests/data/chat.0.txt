@@ -1,0 +1,7 @@
+hello 0_GWORD
+good 0_GADJ
+morning 0_GTOD
+afternoon 0_GTOD
+evening 0_GTOD
+efrain 0_NAME
+se7en 0_NAME

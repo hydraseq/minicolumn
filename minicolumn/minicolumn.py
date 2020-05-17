@@ -108,6 +108,25 @@ class MiniColumn:
         _append_successors(head_node, 1)
         return head_node
 
+    def evaluate(self, sentence):
+        ctree = self.compute_convolution_tree(sentence)
+        endpts = []
+        def _print_node(node, level=0, hist=[]):
+            _hist = hist[:]
+            if len(node) == 2 and isinstance(node[0], list):
+                head = node[0]
+                subnodes = node[1]
+                _hist.append(head)
+                for subnode in subnodes:
+                    _print_node(subnode, level+1, _hist)
+            elif len(node) == 1 and isinstance(node[0][0], dict):
+                _hist.append(node)
+                endpts.append(_hist)
+                return
+            else:
+                raise Exception("WTF?")
+        _print_node(ctree) 
+        return endpts
 
     def resolve_convolution(self, convos): # list of possible thru paths
         """Take a set of convolutions, and return a list of end to end possible paths"""
