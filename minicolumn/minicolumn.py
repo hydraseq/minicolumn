@@ -120,13 +120,33 @@ class MiniColumn:
                 for subnode in subnodes:
                     _print_node(subnode, level+1, _hist)
             elif len(node) == 1 and isinstance(node[0][0], dict):
-                _hist.append(node)
+                _hist.append(node[0])
                 endpts.append(_hist)
                 return
             else:
                 raise Exception("WTF?")
         _print_node(ctree) 
         return endpts
+
+    def get_hits(self, sentence):
+        predicts = self.evaluate(sentence)
+        hits = []
+        for predict in predicts:
+            hit = {}
+            predict.reverse()
+            hit['convo'] = predict[0][0]['convo'][0]
+            sent = []
+            start, end = 0, 1
+            for node in predict:
+                start = node[start]['start']
+                end = node[end - 1]['end']
+            for obj in predict[2][start:end]:
+                sent.append(obj['words'][0][0])
+            hit['words'] = " ".join(sent)
+    
+            hits.append(hit)
+    
+        return hits
 
     def resolve_convolution(self, convos): # list of possible thru paths
         """Take a set of convolutions, and return a list of end to end possible paths"""
