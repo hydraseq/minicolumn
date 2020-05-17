@@ -5,3 +5,8 @@ afternoon 0_GTOD
 evening 0_GTOD
 efrain 0_NAME
 se7en 0_NAME
+read 0_ACT
+news 0_OBJ
+say 0_ACT
+time 0_ACT
+now 0_OBJ
