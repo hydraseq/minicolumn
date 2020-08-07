@@ -1,0 +1,6 @@
+open VERB
+show VERB
+news NOUN
+start VERB
+pomodoro NOUN
+pomodoro VERB

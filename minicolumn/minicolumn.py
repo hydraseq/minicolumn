@@ -13,7 +13,7 @@ class MiniColumn:
     """A stack of trained hydras which can get layers of convolutions
     Initialize this with a set of training files, one per hydra.
     """
-    def __init__(self, source_files=[], dir_root='.'):
+    def __init__(self, source_files=[], dir_root='.', auto_tag=True):
         """Initialize hydras from files.
         Args
             source_files: list<str> a list of filenames with name formated in triplets.
@@ -22,15 +22,28 @@ class MiniColumn:
         Returns
             None
         """
-        self.base_hydra = hydraseq.Hydraseq('_')
+        def _tag_last_word(line, last_uuid, uuid):
+            if last_uuid:
+                last_uuid += '_'
+            line = line.strip()
+            words = line.split()
+            base_words = [last_uuid+word for word in words[:-1]]
+            last_word = uuid+"_"+words[-1]
+            base_words.append(last_word)
+            return " ".join(base_words)
+
+        #self.base_hydra = hydraseq.Hydraseq('_')
+
         self.hydras = []
+        last_uuid = ""
         for fname in source_files:
             base, uuid, ext = fname.split('.')
             h = hydraseq.Hydraseq(uuid+'_')
             with open("{}/{}".format(dir_root, fname), 'r') as source:
                 for line in source:
-                    h.insert(line.strip())
+                    h.insert(_tag_last_word(line, last_uuid, uuid)) if auto_tag else h.insert(line.strip())
             self.hydras.append(h)
+            last_uuid = uuid
         self.depth = len(self.hydras)
         self.convolutions = []
         self.output = None
